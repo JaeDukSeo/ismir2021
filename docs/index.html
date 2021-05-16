@@ -1,813 +1,813 @@
 <!doctype html>
 <html lang="en-US">
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles.css">
-  <title>Towards Automatic Instrumentation by Learning to Separate Parts in Multitrack Music</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Towards Automatic Instrumentation by Learning to Separate Parts in Multitrack Music</title>
+  </head>
 
-<body>
-  <h1>Towards Automatic Instrumentation by Learning to Separate Parts in Multitrack Music</h1>
+  <body>
+    <h1>Towards Automatic Instrumentation by Learning to Separate Parts in Multitrack Music</h1>
 
-  <p>(Supplementary material for the ISMIR 2021 submission)</p>
-  <p>All samples are synthesized using FluidSynth with the MuseScore General soundfont.</p>
-  <p>
-    Shortcuts to examples on paper:
-    <a href="#fig1">Figure 1</a>,
-    <a href="#fig2">Figure 2</a>,
-    <a href="#fig3">Figure 3</a>,
-    <a href="#fig4">Figure 4</a>,
-    <a href="#fig5">Figure 5</a>,
-    <a href="#fig6">Figure 6</a>
-    <br>
-    Shortcuts to random samples:
-    <a href="#bach">Bach chorales</a>,
-    <a href="#string">string quartets</a>,
-    <a href="#game">game music</a>,
-    <a href="#pop">pop music</a>
-  </p>
+    <p>(Supplementary material for the ISMIR 2021 submission)</p>
+    <p>All samples are synthesized using FluidSynth with the MuseScore General soundfont.</p>
+    <p>
+      Shortcuts to examples on paper:
+      <a href="#fig1">Figure 1</a>,
+      <a href="#fig2">Figure 2</a>,
+      <a href="#fig3">Figure 3</a>,
+      <a href="#fig4">Figure 4</a>,
+      <a href="#fig5">Figure 5</a>,
+      <a href="#fig6">Figure 6</a>
+      <br>
+      Shortcuts to random samples:
+      <a href="#bach">Bach chorales</a>,
+      <a href="#string">string quartets</a>,
+      <a href="#game">game music</a>,
+      <a href="#pop">pop music</a>
+    </p>
 
-  <h2 id="examples">Examples on paper</h2>
+    <h2 id="examples">Examples on paper</h2>
 
-  <h3 id="fig1">Figure 1: <cite>Cette année-là</cite> by Claude François</h3>
+    <h3 id="fig1">Figure 1: <cite>Cette année-là</cite> by Claude François</h3>
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/cette_annee_la_common_default_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/cette_annee_la_bw.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/cette_annee_la_truth_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/cette_annee_la_truth.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/cette_annee_la_lstm_default_embedding_onsethint_drums_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/cette_annee_la_lstm.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/cette_annee_la_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/cette_annee_la_bilstm.png" class="score"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/cette_annee_la_common_default_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/cette_annee_la_bw.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/cette_annee_la_truth_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/cette_annee_la_truth.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/cette_annee_la_lstm_default_embedding_onsethint_drums_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/cette_annee_la_lstm.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/cette_annee_la_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/cette_annee_la_bilstm.png" class="score"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
-    <span class="red">strings</span>, <span class="purple">brass</span>.)
-  </p>
+    <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
+      <span class="red">strings</span>, <span class="purple">brass</span>.)
+    </p>
 
-  <h3 id="fig2">Figure 2: <cite>String Quartet No. 11 in F minor, Op. 95, Movement 1</cite> by Ludwig van Beethoven</h3>
+    <h3 id="fig2">Figure 2: <cite>String Quartet No. 11 in F minor, Op. 95, Movement 1</cite> by Ludwig van Beethoven</h3>
 
-  <img src="images/beethoven_op95_score.png" height="150px">
+    <img src="images/beethoven_op95_score.png" height="150px">
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/beethoven_op95_common_default_trimmed.mp3"></audio></td>
-      <td><img src="images/beethoven_op95_bw.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/beethoven_op95_truth_trimmed.mp3"></audio></td>
-      <td><img src="images/beethoven_op95_truth.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/beethoven_op95_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/beethoven_op95_lstm.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/beethoven_op95_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/beethoven_op95_bilstm.png" class="score"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/beethoven_op95_common_default_trimmed.mp3"></audio></td>
+        <td><img src="images/beethoven_op95_bw.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/beethoven_op95_truth_trimmed.mp3"></audio></td>
+        <td><img src="images/beethoven_op95_truth.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/beethoven_op95_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/beethoven_op95_lstm.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/beethoven_op95_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/beethoven_op95_bilstm.png" class="score"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">first violin</span>, <span class="orange">second violin</span>, <span
-      class="green">viola</span>, <span class="red">cello</span>.)</p>
+    <p>(Colors: <span class="blue">first violin</span>, <span class="orange">second violin</span>, <span
+        class="green">viola</span>, <span class="red">cello</span>.)</p>
 
-  <h3 id="fig3">Figure 3: <cite>Wer nur den lieben Gott läßt walten, BWV 434</cite> by Johann Sebastian Bach</h3>
+    <h3 id="fig3">Figure 3: <cite>Wer nur den lieben Gott läßt walten, BWV 434</cite> by Johann Sebastian Bach</h3>
 
-  <img src="images/bwv434_score.png" height="100px">
+    <img src="images/bwv434_score.png" height="100px">
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bwv434_common_default_trimmed.mp3"></audio></td>
-      <td><img src="images/bwv434_bw.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bwv434_truth_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/bwv434_truth.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bwv434_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/bwv434_lstm.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bwv434_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/bwv434_bilstm.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bwv434_common_default_trimmed.mp3"></audio></td>
+        <td><img src="images/bwv434_bw.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bwv434_truth_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/bwv434_truth.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bwv434_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/bwv434_lstm.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bwv434_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/bwv434_bilstm.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">soprano</span>, <span class="orange">alto</span>, <span class="green">tenor</span>,
-    <span class="red">bass</span>.)
-  </p>
+    <p>(Colors: <span class="blue">soprano</span>, <span class="orange">alto</span>, <span class="green">tenor</span>,
+      <span class="red">bass</span>.)
+    </p>
 
-  <h3 id="fig4">Figure 4: <cite>Theme of Universe</cite> from Miracle Ropit's Adventure in 2100</h3>
+    <h3 id="fig4">Figure 4: <cite>Theme of Universe</cite> from Miracle Ropit's Adventure in 2100</h3>
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_common_default_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_bw.png" class="score"
-          style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_truth_trimmed.mp3"></audio></td>
-      <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_truth.png" class="score"
-          style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_lstm.png" class="score"
-          style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_bilstm.png" class="score"
-          style="max-width: 400px;"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_common_default_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_bw.png" class="score"
+            style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_truth_trimmed.mp3"></audio></td>
+        <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_truth.png" class="score"
+            style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_lstm_default_embedding_onsethint_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_lstm.png" class="score"
+            style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/miracle_ropits_adventure_in_2100_theme_of_universe_lstm_bidirectional_embedding_onsethint_duration_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/miracle_ropits_adventure_in_2100_theme_of_universe_bilstm.png" class="score"
+            style="max-width: 400px;"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">pulse wave I</span>, <span class="orange">pulse wave II</span>, <span
-      class="green">triangle wave</span>.)
-  </p>
+    <p>(Colors: <span class="blue">pulse wave I</span>, <span class="orange">pulse wave II</span>, <span
+        class="green">triangle wave</span>.)
+    </p>
 
-  <h3 id="fig5">Figure 5: <cite>Blame It On the Boogie</cite> by The Jacksons</h3>
+    <h3 id="fig5">Figure 5: <cite>Blame It On the Boogie</cite> by The Jacksons</h3>
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/blame_it_on_the_boogie_common_default_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/blame_it_on_the_boogie_bw.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/blame_it_on_the_boogie_truth_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/blame_it_on_the_boogie_truth.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/blame_it_on_the_boogie_lstm_default_embedding_onsethint_drums_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/blame_it_on_the_boogie_lstm.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/blame_it_on_the_boogie_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/blame_it_on_the_boogie_bilstm.png" class="score" style="max-width: 400px;"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/blame_it_on_the_boogie_common_default_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/blame_it_on_the_boogie_bw.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/blame_it_on_the_boogie_truth_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/blame_it_on_the_boogie_truth.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/blame_it_on_the_boogie_lstm_default_embedding_onsethint_drums_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/blame_it_on_the_boogie_lstm.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/blame_it_on_the_boogie_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/blame_it_on_the_boogie_bilstm.png" class="score" style="max-width: 400px;"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
-    <span class="red">strings</span>, <span class="purple">brass</span>.)
-  </p>
+    <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
+      <span class="red">strings</span>, <span class="purple">brass</span>.)
+    </p>
 
-  <h3 id="fig6">Figure 6: <cite>Quando Quando Quando</cite> by Tony Renis</h3>
+    <h3 id="fig6">Figure 6: <cite>Quando Quando Quando</cite> by Tony Renis</h3>
 
-  <table>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/quando_quando_quando_common_default_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/quando_quando_quando_bw.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/quando_quando_quando_truth_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/quando_quando_quando_truth.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Online LSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/quando_quando_quando_lstm_default_embedding_drums_trimmed.mp3"></audio></td>
-      <td><img src="images/quando_quando_quando_lstm.png" class="score"></td>
-    </tr>
-    <tr>
-      <td>Offline BiLSTM prediction</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/quando_quando_quando_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
-      </td>
-      <td><img src="images/quando_quando_quando_bilstm.png" class="score"></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/quando_quando_quando_common_default_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/quando_quando_quando_bw.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/quando_quando_quando_truth_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/quando_quando_quando_truth.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Online LSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/quando_quando_quando_lstm_default_embedding_drums_trimmed.mp3"></audio></td>
+        <td><img src="images/quando_quando_quando_lstm.png" class="score"></td>
+      </tr>
+      <tr>
+        <td>Offline BiLSTM prediction</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/quando_quando_quando_lstm_bidirectional_embedding_onsethint_duration_drums_trimmed.mp3"></audio>
+        </td>
+        <td><img src="images/quando_quando_quando_bilstm.png" class="score"></td>
+      </tr>
+    </table>
 
-  <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
-    <span class="red">strings</span>, <span class="purple">brass</span>.)
-  </p>
+    <p>(Colors: <span class="blue">piano</span>, <span class="orange">guitar</span>, <span class="green">bass</span>,
+      <span class="red">strings</span>, <span class="purple">brass</span>.)
+    </p>
 
-  <h2 id="random-samples">Random Samples</h2>
+    <h2 id="random-samples">Random Samples</h2>
 
-  <h3 id="bach">Bach chorales</h3>
+    <h3 id="bach">Bach chorales</h3>
 
-  <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
-    beat embedding,
-    <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
-  </p>
-  <p><strong>Tracks</strong>: soprano, alto, tenor, bass</p>
+    <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
+      beat embedding,
+      <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
+    </p>
+    <p><strong>Tracks</strong>: soprano, alto, tenor, bass</p>
 
-  <table>
-    <tr>
-      <th></th>
-      <th><cite>Ich freue mich in dir</cite><br>(BWV 133)</th>
-      <th><cite>Wo Gott der Herr nicht bei uns hält</cite><br>(BWV 258)</th>
-      <th><cite>Ich hab mein Sach Gott heimgestellt</cite><br>(BWV 351)</th>
-      <th><cite>Jesu, meine Freude</cite><br>(BWV 358)</th>
-      <th><cite>Nicht so traurig, nicht so sehr</cite><br>(BWV 384)</th>
-    </tr>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_common_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv133.6_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv258_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv351_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv358_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv384_truth.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Zone-based</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_zone_permutation.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_closest_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch (mono)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_closest_states.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_lstm_default_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb. +e.h.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_lstm_default_embedding_onsethint.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_lstm_bidirectional_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb. +e.h. +dur.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv133.6_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv258_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv351_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv358_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/bach/bwv384_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th></th>
+        <th><cite>Ich freue mich in dir</cite><br>(BWV 133)</th>
+        <th><cite>Wo Gott der Herr nicht bei uns hält</cite><br>(BWV 258)</th>
+        <th><cite>Ich hab mein Sach Gott heimgestellt</cite><br>(BWV 351)</th>
+        <th><cite>Jesu, meine Freude</cite><br>(BWV 358)</th>
+        <th><cite>Nicht so traurig, nicht so sehr</cite><br>(BWV 384)</th>
+      </tr>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_common_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv133.6_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv258_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv351_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv358_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/bach/bwv384_truth.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Zone-based</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_zone_permutation.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_closest_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch (mono)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_closest_states.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_lstm_default_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb. +e.h.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_lstm_default_embedding_onsethint.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_lstm_bidirectional_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb. +e.h. +dur.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv133.6_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv258_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv351_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv358_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/bach/bwv384_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+      </tr>
+    </table>
 
-  <h3 id="string">String quartets</h3>
+    <h3 id="string">String quartets</h3>
 
-  <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
-    beat embedding,
-    <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
-  </p>
-  <p><strong>Tracks</strong>: violin I, violin II, viola, cello</p>
+    <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
+      beat embedding,
+      <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
+    </p>
+    <p><strong>Tracks</strong>: violin I, violin II, viola, cello</p>
 
-  <table>
-    <tr>
-      <th></th>
-      <th>Mozart's <cite>String Quartet No. 14</cite><br>(G major, K. 387, Movement 1)</th>
-      <th>Dvořák's <cite>String Quartet No. 10</cite><br>(E-flat, Op.51, Movement 4)</th>
-      <th>Dvořák's <cite>String Quartet No. 12</cite><br>(F major, Op. 96, Movement 2)</th>
-      <th>Ravel's <cite>String Quartet in F</cite><br>(Movement 2)</th>
-      <th>Beethoven's <cite>String Quartet No. 15</cite><br>(A minor, Movement 2)</th>
-    </tr>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_common_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/musicnet/2314_qt15_2_truth.mp3">
-        </audio></td>
-    </tr>
-    <tr>
-      <td>Zone-based</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_zone_permutation.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_closest_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch (mono)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_closest_states.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_lstm_default_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb. +e.h.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_lstm_default_embedding_onsethint.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_lstm_bidirectional_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb. +e.h. +dur.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1805_kv_387_1_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1919_dvqt10m4_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/1931_dv96_2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2178_gr_rqtf2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/musicnet/2314_qt15_2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th></th>
+        <th>Mozart's <cite>String Quartet No. 14</cite><br>(G major, K. 387, Movement 1)</th>
+        <th>Dvořák's <cite>String Quartet No. 10</cite><br>(E-flat, Op.51, Movement 4)</th>
+        <th>Dvořák's <cite>String Quartet No. 12</cite><br>(F major, Op. 96, Movement 2)</th>
+        <th>Ravel's <cite>String Quartet in F</cite><br>(Movement 2)</th>
+        <th>Beethoven's <cite>String Quartet No. 15</cite><br>(A minor, Movement 2)</th>
+      </tr>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_common_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg" src="audio/musicnet/2314_qt15_2_truth.mp3">
+          </audio></td>
+      </tr>
+      <tr>
+        <td>Zone-based</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_zone_permutation.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_closest_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch (mono)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_closest_states.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_lstm_default_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb. +e.h.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_lstm_default_embedding_onsethint.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_lstm_bidirectional_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb. +e.h. +dur.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1805_kv_387_1_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1919_dvqt10m4_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/1931_dv96_2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2178_gr_rqtf2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/musicnet/2314_qt15_2_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+      </tr>
+    </table>
 
-  <h3 id="game">Game music</h3>
+    <h3 id="game">Game music</h3>
 
-  <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
-    beat embedding,
-    <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
-  </p>
-  <p><strong>Tracks</strong>: pulse wave I, pulse wave II, triangle wave</p>
+    <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
+      beat embedding,
+      <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
+    </p>
+    <p><strong>Tracks</strong>: pulse wave I, pulse wave II, triangle wave</p>
 
-  <table>
-    <tr>
-      <th></th>
-      <th><cite>Booby March</cite><br>(from <cite>Booby Kids</cite>)</th>
-      <th><cite>To Be Continued</cite><br>(from <cite>Golgo 13: Top Secret Episode</cite>)</th>
-      <th><cite>William's Theme</cite><br>(from <cite>Murder on the Mississippi</cite>)</th>
-      <th><cite>Pattern Clear</cite><br>(from <cite>Quarth</cite>)</th>
-      <th><cite>Break Time</cite><br>(from <cite>VS Duck Hunt</cite>)</th>
-    </tr>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_common_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_common_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_truth.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_truth.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Zone-based</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_zone_permutation.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_zone_permutation.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_closest_default.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_closest_default.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch (mono)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_closest_states.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_closest_states.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_lstm_default_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_default_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb. +e.h.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_default_embedding_onsethint.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_default_embedding_onsethint.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_lstm_default_embedding_onsethint.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_default_embedding_onsethint.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_bidirectional_embedding.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_bidirectional_embedding.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_lstm_bidirectional_embedding.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_bidirectional_embedding.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb. +e.h. +dur.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/272_Quarth_04_05PatternClear_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th></th>
+        <th><cite>Booby March</cite><br>(from <cite>Booby Kids</cite>)</th>
+        <th><cite>To Be Continued</cite><br>(from <cite>Golgo 13: Top Secret Episode</cite>)</th>
+        <th><cite>William's Theme</cite><br>(from <cite>Murder on the Mississippi</cite>)</th>
+        <th><cite>Pattern Clear</cite><br>(from <cite>Quarth</cite>)</th>
+        <th><cite>Break Time</cite><br>(from <cite>VS Duck Hunt</cite>)</th>
+      </tr>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_common_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_common_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_truth.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_truth.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Zone-based</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_zone_permutation.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_zone_permutation.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_closest_default.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_closest_default.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch (mono)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_closest_states.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_closest_states.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_lstm_default_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_default_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb. +e.h.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_default_embedding_onsethint.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_default_embedding_onsethint.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_lstm_default_embedding_onsethint.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_default_embedding_onsethint.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_bidirectional_embedding.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_bidirectional_embedding.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_lstm_bidirectional_embedding.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_bidirectional_embedding.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb. +e.h. +dur.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/037_BoobyKids_07_08BoobyMarch_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/145_Golgo13_TopSecretEpisode_21_22ToBeContinued_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/242_MississippiSatsujinJiken_06_07WilliamsTheme_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/272_Quarth_04_05PatternClear_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/nes/374_Vs_DuckHunt_06_07BreakTime_lstm_bidirectional_embedding_onsethint_duration.mp3"></audio>
+        </td>
+      </tr>
+    </table>
 
-  <h3 id="pop">Pop music</h3>
+    <h3 id="pop">Pop music</h3>
 
-  <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
-    beat embedding,
-    <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
-  </p>
+    <p>(The following five samples are randomly chosen from the test set. Abbreviations: <em>emb.</em>&ndash;pitch, time,
+      beat embedding,
+      <em>dur.</em>&ndash;duration input, <em>e.h.</em>&ndash;entry hints.)
+    </p>
 
-  <p><em>(Note: This dataset is rather noisy due to instrument mapping. Oftentimes, melody track is missing.)</em></p>
-  <p><strong>Tracks</strong>: piano, guitar, bass, strings, brass</p>
+    <p><em>(Note: This dataset is rather noisy due to instrument mapping. Oftentimes, melody track is missing.)</em></p>
+    <p><strong>Tracks</strong>: piano, guitar, bass, strings, brass</p>
 
-  <table>
-    <tr>
-      <th></th>
-      <th><cite>Alt wie ein Baum</cite><br>(by Puhdys)</th>
-      <th><cite>Wide Open Spaces</cite><br>(by The Chicks)</th>
-      <th><cite>Children Of Paradise</cite><br>(by Boney M.)</th>
-      <th><cite>We will rock you</cite><br>(by Queen)</th>
-      <th><cite>Encore Une Fois</cite><br>(by Sash!)</th>
-    </tr>
-    <tr>
-      <td>Mixture (input)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_common_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_common_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_common_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_common_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_common_default_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Ground truth</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_truth_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_truth_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_truth_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_truth_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_truth_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Zone-based</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_zone_permutation_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_zone_permutation_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_zone_permutation_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_zone_permutation_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_zone_permutation_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_closest_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_closest_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_closest_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_closest_default_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_closest_default_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>Closest-pitch (mono)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_closest_states_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_closest_states_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_closest_states_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_closest_states_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_closest_states_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_default_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_default_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_default_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_default_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_default_embedding_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>LSTM (+emb. +e.h.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
-      </td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
-    </tr>
-    <tr>
-      <td>BiLSTM (+emb. +e.h. +dur.)</td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
-      </td>
-      <td><audio controls controlsList="nodownload" type="audio/mpeg"
-          src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th></th>
+        <th><cite>Alt wie ein Baum</cite><br>(by Puhdys)</th>
+        <th><cite>Wide Open Spaces</cite><br>(by The Chicks)</th>
+        <th><cite>Children Of Paradise</cite><br>(by Boney M.)</th>
+        <th><cite>We will rock you</cite><br>(by Queen)</th>
+        <th><cite>Encore Une Fois</cite><br>(by Sash!)</th>
+      </tr>
+      <tr>
+        <td>Mixture (input)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_common_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_common_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_common_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_common_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_common_default_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Ground truth</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_truth_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_truth_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_truth_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_truth_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_truth_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Zone-based</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_zone_permutation_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_zone_permutation_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_zone_permutation_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_zone_permutation_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_zone_permutation_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_closest_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_closest_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_closest_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_closest_default_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_closest_default_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>Closest-pitch (mono)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_closest_states_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_closest_states_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_closest_states_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_closest_states_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_closest_states_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_default_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_default_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_default_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_default_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_default_embedding_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>LSTM (+emb. +e.h.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_default_embedding_onsethint_drums.mp3"></audio>
+        </td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_bidirectional_embedding_drums.mp3"></audio></td>
+      </tr>
+      <tr>
+        <td>BiLSTM (+emb. +e.h. +dur.)</td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/3ff3228d9b0a4592efbdea0ca1025cec.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/8e3a44cdb523ededf86bb5039e9907c4.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/a1ee7b95f5380f8d473c7a62538f008e.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/ad2df427438182906ab792b4b8112ada.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
+        </td>
+        <td><audio controls controlsList="nodownload" type="audio/mpeg"
+            src="audio/lmd/c67c1829d2839d5f28f0e814a4ced2f5.json_lstm_bidirectional_embedding_onsethint_duration_drums.mp3"></audio>
+        </td>
+      </tr>
+    </table>
 
-</body>
+  </body>
 
 </html>
